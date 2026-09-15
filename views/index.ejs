@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="board-header">
+      <h1 class="board-title"><%= title %></h1>
+      <a href="/new" class="btn btn-primary">+ New Message</a>
+    </header>
+
+    <ul class="messages-list">
+      <% messages.forEach((message) => { %>
+        <li class="message-card">
+          <div class="message-meta">
+            <div class="avatar">
+              <%= message.user ? message.user.charAt(0) : '?' %>
+            </div>
+            <div class="meta-details">
+              <span class="user-name"><%= message.user %></span>
+              <time class="time-stamp">
+                <%= new Date(message.added).toLocaleDateString(undefined, { 
+                  month: 'short', 
+                  day: 'numeric', 
+                  hour: '2-digit', 
+                  minute: '2-digit' 
+                }) %>
+              </time>
+            </div>
+          </div>
+
+          <p class="message-text"><%= message.text %></p>
+
+          <div class="card-footer">
+            <a href="/message/<%= message.id %>" class="link-action">Open details →</a>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+  </main>
+</body>
+</html>
