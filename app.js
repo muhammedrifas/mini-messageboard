@@ -15,7 +15,12 @@ app.use(express.static(path.join(__dirname, "public")));
 // Mount router
 app.use("/", indexRouter);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
+}
+
+// Export the app for Vercel's serverless handler
+module.exports = app;
